@@ -4,7 +4,7 @@ export const siteConfig = {
   ogImage: "https://ui.shadcn.com/og.jpg",
   description: "Create, edit and track your tasks effortlessly with Taskly.",
   links: {
-    github: "https://github.com/OgaDavid/uptick-talent-frontend-task",
+    github: "https://github.com/OgaDavid/taskly-redux",
   },
 };
 
