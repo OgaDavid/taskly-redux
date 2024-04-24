@@ -8,11 +8,7 @@ const TaskPreview = () => {
       // @ts-expect-error err
       state.modal.previewTaskId
   );
-  const tasks = useSelector<RootState>(
-    (state) =>
-      // @ts-expect-error err
-      state.task.taskList
-  );
+  const tasks = useSelector<RootState>((state) => state.task.taskList);
 
   // @ts-expect-error err
   const task = tasks.find((task) => task.id === taskId);

@@ -23,11 +23,11 @@ import { Task } from "@/types";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
-import { setAllTasks } from "@/store/todo/actions";
+import { setAllTasks } from "@/store/tasks/actions";
 import { useLocalStorage } from "@/hooks/use-local-storage";
 import { useDispatch, useSelector } from "react-redux";
 import { closeModal } from "@/store/modal/actions";
-import { EDIT_TASK } from "../modals/constants";
+import { EDIT_TASK } from "@/components/modals/constants";
 import { RootState } from "@/store/reducers";
 
 const formSchema = z.object({
@@ -48,12 +48,13 @@ const formSchema = z.object({
 });
 
 export function EditTaskForm() {
-  // @ts-expect-error err
-  const taskId = useSelector<RootState>((state) => state.modal.editTaskId);
+  const currentTaskId = useSelector<RootState>(
+    (state) => state.task.currentTaskId
+  );
   const { setTasks, getTasks } = useLocalStorage("Tasks");
 
   const allTasks = getTasks() || [];
-  const task = allTasks.find((task: Task) => task.id === taskId);
+  const task = allTasks.find((task: Task) => task.id === currentTaskId);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -69,7 +70,9 @@ export function EditTaskForm() {
   function onSubmit(values: z.infer<typeof formSchema>) {
     try {
       // Find the index of the task to edit
-      const taskIndex = allTasks.findIndex((task: Task) => task.id === taskId);
+      const taskIndex = allTasks.findIndex(
+        (task: Task) => task.id === currentTaskId
+      );
       // Update the task with the new values
       allTasks[taskIndex] = {
         ...allTasks[taskIndex],
@@ -78,7 +81,7 @@ export function EditTaskForm() {
       // Set the updated tasks to local storage
       setTasks(allTasks);
       // Set the updated tasks to the store
-      setAllTasks(allTasks);
+      dispatch(setAllTasks(allTasks));
     } catch (error) {
       console.log("EDIT_TASK_ERROR", error);
     } finally {

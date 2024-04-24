@@ -1,9 +1,11 @@
+import { Task } from "@/types";
 import {
   ADD_TASK,
   EDIT_TASK,
   DELETE_TASK,
   PREVIEW_TASK,
   SET_ALL_TASKS,
+  SET_CURRENT_TASK_ID,
 } from "./constants";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -13,10 +15,14 @@ interface TaskActions {
   payload: any;
 }
 
-const initialState = {
-  taskList: [],
-  editTaskId: "",
-  previewTaskId: "",
+interface TaskStore {
+  taskList: Task[];
+  currentTaskId: string;
+}
+
+const initialState: TaskStore = {
+  taskList: [] as Task[],
+  currentTaskId: "",
 };
 
 const task = (state = initialState, action: TaskActions) => {
@@ -39,13 +45,17 @@ const task = (state = initialState, action: TaskActions) => {
     case DELETE_TASK:
       return {
         ...state,
-        // @ts-expect-error err
         taskList: state.taskList.filter((task) => task.id !== action.payload),
       };
     case PREVIEW_TASK:
       return {
         ...state,
         previewTaskId: action.payload,
+      };
+    case SET_CURRENT_TASK_ID:
+      return {
+        ...state,
+        currentTaskId: action.payload,
       };
     default:
       return state;
