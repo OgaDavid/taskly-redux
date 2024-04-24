@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import task from "./todo/reducer";
+import task from "./tasks/reducer";
 import modal from "./modal/reducer";
 
 const rootReducer = combineReducers({

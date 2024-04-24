@@ -5,6 +5,7 @@ import {
   PREVIEW_TASK,
   GET_ALL_TASKS,
   SET_ALL_TASKS,
+  SET_CURRENT_TASK_ID,
 } from "./constants";
 
 export interface Task {
@@ -42,16 +43,23 @@ export const editTask = (task: Task) => {
   };
 };
 
-export const deleteTask = (id: number) => {
+export const deleteTask = (id: string) => {
   return {
     type: DELETE_TASK,
     payload: id,
   };
 };
 
-export const previewTask = (id: number) => {
+export const previewTask = (id: string) => {
   return {
     type: PREVIEW_TASK,
+    payload: id,
+  };
+};
+
+export const setCurrentTaskId = (id: string) => {
+  return {
+    type: SET_CURRENT_TASK_ID,
     payload: id,
   };
 };

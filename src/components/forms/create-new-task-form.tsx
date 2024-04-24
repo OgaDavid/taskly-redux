@@ -23,7 +23,7 @@ import { Calendar } from "@/components/ui/calendar";
 import { cn } from "@/lib/utils";
 import { generateTodoId } from "@/helpers";
 import { useLocalStorage } from "@/hooks/use-local-storage";
-import { setAllTasks } from "@/store/todo/actions";
+import { setAllTasks } from "@/store/tasks/actions";
 import { toast } from "sonner";
 
 import { useDispatch } from "react-redux";

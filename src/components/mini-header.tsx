@@ -5,17 +5,9 @@ import { CalendarDays, Plus } from "lucide-react";
 import useMediaQuery from "@/helpers/useMediaQuery";
 import { useDispatch } from "react-redux";
 import { openModal } from "@/store/modal/actions";
-import { CREATE_TASK } from "./modals/constants";
+import { CREATE_TASK } from "@/components/modals/constants";
 
 const MiniHeader = () => {
-  //   const onOpen = useCreateTaskModalStore((state) => state.onOpen);
-  //   const isOpen = useCreateTaskModalStore((state) => state.isOpen);
-
-  //   const openCreateTaskModal = () => {
-  //     if (!isOpen) {
-  //       onOpen();
-  //     }
-  //   };
 
   const dispatch = useDispatch();
 
