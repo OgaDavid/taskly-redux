@@ -3,11 +3,7 @@ import { RootState } from "@/store/reducers";
 import { useSelector } from "react-redux";
 
 const TaskPreview = () => {
-  const taskId = useSelector<RootState>(
-    (state) =>
-      // @ts-expect-error err
-      state.modal.previewTaskId
-  );
+  const taskId = useSelector<RootState>((state) => state.task.currentTaskId);
   const tasks = useSelector<RootState>((state) => state.task.taskList);
 
   // @ts-expect-error err
