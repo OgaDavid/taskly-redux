@@ -1,37 +1,57 @@
-import { ADD_TODO, UPDATE_TODO, DELETE_TODO, PREVIEW_TODO } from "./constants";
+import {
+  ADD_TASK,
+  EDIT_TASK,
+  DELETE_TASK,
+  PREVIEW_TASK,
+  GET_ALL_TASKS,
+  SET_ALL_TASKS,
+} from "./constants";
 
-export interface Todo {
+export interface Task {
   id: string;
-  todoTitle: string;
-  todoDescription: string;
+  taskTitle: string;
+  taskDescription: string;
   dueDate: string;
   isCompleted: boolean;
 }
 
-export const addTodo = (todo: Todo) => {
+export const getAllTasks = () => {
   return {
-    type: ADD_TODO,
-    payload: todo,
+    type: GET_ALL_TASKS,
   };
 };
 
-export const updateTodo = (todo: Todo) => {
+export const setAllTasks = (tasks: Task[]) => {
   return {
-    type: UPDATE_TODO,
-    payload: todo,
+    type: SET_ALL_TASKS,
+    payload: tasks,
   };
 };
 
-export const deleteTodo = (id: number) => {
+export const addTask = (task: Task) => {
   return {
-    type: DELETE_TODO,
+    type: ADD_TASK,
+    payload: task,
+  };
+};
+
+export const editTask = (task: Task) => {
+  return {
+    type: EDIT_TASK,
+    payload: task,
+  };
+};
+
+export const deleteTask = (id: number) => {
+  return {
+    type: DELETE_TASK,
     payload: id,
   };
 };
 
-export const previewTodo = (id: number) => {
+export const previewTask = (id: number) => {
   return {
-    type: PREVIEW_TODO,
+    type: PREVIEW_TASK,
     payload: id,
   };
 };

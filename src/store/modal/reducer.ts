@@ -7,6 +7,7 @@ const initialState = {
 
 export interface ModalActions {
   type: string;
+  view?: string;
 }
 
 const modal = (state = initialState, action: ModalActions) => {
@@ -15,11 +16,13 @@ const modal = (state = initialState, action: ModalActions) => {
       return {
         ...state,
         isOpen: true,
+        view: action.view,
       };
     case CLOSE_MODAL:
       return {
         ...state,
         isOpen: false,
+        view: action.view,
       };
     default:
       return state;

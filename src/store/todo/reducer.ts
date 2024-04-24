@@ -1,46 +1,55 @@
-import { ADD_TODO, UPDATE_TODO, DELETE_TODO, PREVIEW_TODO } from "./constants";
+import {
+  ADD_TASK,
+  EDIT_TASK,
+  DELETE_TASK,
+  PREVIEW_TASK,
+  SET_ALL_TASKS,
+} from "./constants";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-interface TodoActions {
+interface TaskActions {
   type: string;
   payload: any;
 }
 
 const initialState = {
-  todoList: [],
+  taskList: [],
+  editTaskId: "",
+  previewTaskId: "",
 };
 
-const todo = (state = initialState, action: TodoActions) => {
+const task = (state = initialState, action: TaskActions) => {
   switch (action.type) {
-    case ADD_TODO:
+    case ADD_TASK:
       return {
         ...state,
-        todoList: [...state.todoList, action.payload],
+        taskList: [...state.taskList, action.payload],
       };
-    case UPDATE_TODO:
+    case SET_ALL_TASKS:
       return {
         ...state,
-        todoList: state.todoList.map((todo) =>
-          // @ts-expect-error err
-          todo.id === action.payload.id ? action.payload : todo
-        ),
+        taskList: action.payload,
       };
-    case DELETE_TODO:
+    case EDIT_TASK:
+      return {
+        ...state,
+        setEditTaskId: action.payload,
+      };
+    case DELETE_TASK:
       return {
         ...state,
         // @ts-expect-error err
-        todoList: state.todoList.filter((todo) => todo.id !== action.payload),
+        taskList: state.taskList.filter((task) => task.id !== action.payload),
       };
-    case PREVIEW_TODO:
+    case PREVIEW_TASK:
       return {
         ...state,
-        // @ts-expect-error err
-        todoList: state.todoList.find((todo) => todo.id === action.payload),
+        previewTaskId: action.payload,
       };
     default:
       return state;
   }
 };
 
-export default todo;
+export default task;

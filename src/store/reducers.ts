@@ -1,9 +1,9 @@
 import { combineReducers } from "redux";
-import todo from "./todo/reducer";
+import task from "./todo/reducer";
 import modal from "./modal/reducer";
 
 const rootReducer = combineReducers({
-  todo,
+  task,
   modal,
 });
 

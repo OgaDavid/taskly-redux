@@ -1,5 +1,6 @@
-import SiteHeader from "@/components/SiteHeader";
-import MiniHeader from "@/components/MiniHeader";
+import SiteHeader from "@/components/site-header";
+import MiniHeader from "@/components/mini-header";
+import { ModalProvider } from "@/providers/modal-provider";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
           <button>Add Todo</button>
         </div>
       </div>
+      <ModalProvider />
     </div>
   );
 }
