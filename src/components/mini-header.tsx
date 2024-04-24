@@ -1,14 +1,19 @@
-import { getToday } from "@/helpers";
+// ui
 import { Button } from "@/components/ui/button";
+
+// icons
 import { CalendarDays, Plus } from "lucide-react";
-// import { useCreateTaskModalStore } from "@/hooks/use-create-task-modal";
+
+// helpers
+import { getToday } from "@/helpers";
 import useMediaQuery from "@/helpers/useMediaQuery";
+
+// redux
 import { useDispatch } from "react-redux";
 import { openModal } from "@/store/modal/actions";
 import { CREATE_TASK } from "@/components/modals/constants";
 
 const MiniHeader = () => {
-
   const dispatch = useDispatch();
 
   const isDesktop = useMediaQuery("(min-width: 768px)");

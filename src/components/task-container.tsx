@@ -1,12 +1,17 @@
-import { Task } from "@/types";
+// ui
+import { Button } from "@/components/ui/button";
 import TaskCard from "@/components/task-card";
-import { Button } from "./ui/button";
-import { useDispatch } from "react-redux";
+
+// redux
 import { openModal } from "@/store/modal/actions";
+import { useDispatch } from "react-redux";
 import { CREATE_TASK } from "@/components/modals/constants";
+
+import { Task } from "@/types";
 
 const TasksContainer = ({ tasks }: { tasks: Task[] }) => {
   const dispatch = useDispatch();
+
   const completedTasks = tasks.filter((task) => task.isCompleted);
 
   if (tasks.length < 1) {

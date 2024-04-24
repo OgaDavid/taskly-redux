@@ -1,12 +1,18 @@
-import { getDueDate } from "@/helpers";
+// redux
 import { RootState } from "@/store/reducers";
 import { useSelector } from "react-redux";
 
-const TaskPreview = () => {
-  const taskId = useSelector<RootState>((state) => state.task.currentTaskId);
-  const tasks = useSelector<RootState>((state) => state.task.taskList);
+// helpers
+import { getDueDate } from "@/helpers";
+import { Task } from "@/types";
 
-  // @ts-expect-error err
+const TaskPreview = () => {
+  const tasks = useSelector<RootState>(
+    (state) => state.task.taskList
+  ) as Task[];
+
+  const taskId = useSelector<RootState>((state) => state.task.currentTaskId);
+
   const task = tasks.find((task) => task.id === taskId);
 
   return (

@@ -1,6 +1,6 @@
 export const siteConfig = {
   name: "Taskly",
-  url: "https://trytaskly.vercel.app",
+  url: "https://taskly-redux.vercel.app",
   ogImage: "https://ui.shadcn.com/og.jpg",
   description: "Create, edit and track your tasks effortlessly with Taskly.",
   links: {

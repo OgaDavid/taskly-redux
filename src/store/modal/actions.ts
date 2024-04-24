@@ -7,13 +7,6 @@ export const openModal = (view: string) => {
   };
 };
 
-export const setModalOpen = (view: string) => {
-  return {
-    type: OPEN_MODAL,
-    view: view,
-  };
-};
-
 export const closeModal = (view: string) => {
   return {
     type: CLOSE_MODAL,

@@ -1,10 +1,13 @@
+// libraries
 import { z } from "zod";
-import { useForm } from "react-hook-form";
 import { format } from "date-fns";
-import { CalendarIcon, ClipboardPenLine } from "lucide-react";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { toast } from "sonner";
 
+// icons
+import { CalendarIcon, ClipboardPenLine } from "lucide-react";
+
+// components
 import {
   Form,
   FormControl,
@@ -18,17 +21,25 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { cn } from "@/lib/utils";
-import { Task } from "@/types";
+
+// ui
+import { toast } from "sonner";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
-import { setAllTasks } from "@/store/tasks/actions";
+
+// helpers
+import { cn } from "@/lib/utils";
 import { useLocalStorage } from "@/hooks/use-local-storage";
-import { useDispatch, useSelector } from "react-redux";
-import { closeModal } from "@/store/modal/actions";
+
+// redux
 import { EDIT_TASK } from "@/components/modals/constants";
 import { RootState } from "@/store/reducers";
+import { closeModal } from "@/store/modal/actions";
+import { setAllTasks } from "@/store/tasks/actions";
+import { useDispatch, useSelector } from "react-redux";
+
+import { Task } from "@/types";
 
 const formSchema = z.object({
   taskTitle: z.string().min(2, {
@@ -48,9 +59,12 @@ const formSchema = z.object({
 });
 
 export function EditTaskForm() {
+  const dispatch = useDispatch();
+
   const currentTaskId = useSelector<RootState>(
     (state) => state.task.currentTaskId
   );
+
   const { setTasks, getTasks } = useLocalStorage("Tasks");
 
   const allTasks = getTasks() || [];
@@ -64,8 +78,6 @@ export function EditTaskForm() {
       dueDate: new Date(task?.dueDate) || null,
     },
   });
-
-  const dispatch = useDispatch();
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     try {
