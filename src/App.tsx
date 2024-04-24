@@ -7,6 +7,9 @@ function App() {
       <SiteHeader />
       <div className="wrapper pt-10">
         <MiniHeader />
+        <div className="mt-10">
+          <button>Add Todo</button>
+        </div>
       </div>
     </div>
   );
