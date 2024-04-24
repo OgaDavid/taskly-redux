@@ -3,6 +3,9 @@ import { Button } from "@/components/ui/button";
 import { CalendarDays, Plus } from "lucide-react";
 // import { useCreateTaskModalStore } from "@/hooks/use-create-task-modal";
 import useMediaQuery from "@/helpers/useMediaQuery";
+import { useDispatch } from "react-redux";
+import { openModal } from "@/store/modal/actions";
+import { CREATE_TASK } from "./modals/constants";
 
 const MiniHeader = () => {
   //   const onOpen = useCreateTaskModalStore((state) => state.onOpen);
@@ -13,6 +16,8 @@ const MiniHeader = () => {
   //       onOpen();
   //     }
   //   };
+
+  const dispatch = useDispatch();
 
   const isDesktop = useMediaQuery("(min-width: 768px)");
 
@@ -25,7 +30,7 @@ const MiniHeader = () => {
           {getToday()}
         </p>
       </div>
-      <Button onClick={() => {}}>
+      <Button onClick={() => dispatch(openModal(CREATE_TASK))}>
         {isDesktop ? "Create New Task" : "Add Task"}
         <Plus className="w-4 font h-4 ml-2" />
       </Button>
