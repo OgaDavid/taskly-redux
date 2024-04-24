@@ -1,6 +1,7 @@
 import SiteHeader from "@/components/site-header";
 import MiniHeader from "@/components/mini-header";
 import { ModalProvider } from "@/providers/modal-provider";
+import { ToastProvider } from "@/providers/toast-provider";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         </div>
       </div>
       <ModalProvider />
+      <ToastProvider />
     </div>
   );
 }
