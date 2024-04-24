@@ -3,7 +3,6 @@ import {
   EDIT_TASK,
   DELETE_TASK,
   PREVIEW_TASK,
-  GET_ALL_TASKS,
   SET_ALL_TASKS,
   SET_CURRENT_TASK_ID,
 } from "./constants";
@@ -15,12 +14,6 @@ export interface Task {
   dueDate: string;
   isCompleted: boolean;
 }
-
-export const getAllTasks = () => {
-  return {
-    type: GET_ALL_TASKS,
-  };
-};
 
 export const setAllTasks = (tasks: Task[]) => {
   return {

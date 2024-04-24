@@ -1,9 +1,13 @@
+// libraries
 import { z } from "zod";
-import { useForm } from "react-hook-form";
 import { format } from "date-fns";
-import { CalendarIcon, PartyPopper } from "lucide-react";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
+// icons
+import { CalendarIcon, PartyPopper } from "lucide-react";
+
+// components
 import {
   Form,
   FormControl,
@@ -17,16 +21,21 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+
+// ui
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
-import { cn } from "@/lib/utils";
-import { generateTodoId } from "@/helpers";
-import { useLocalStorage } from "@/hooks/use-local-storage";
-import { setAllTasks } from "@/store/tasks/actions";
 import { toast } from "sonner";
 
+// helpers
+import { cn } from "@/lib/utils";
+import { generateTaskId } from "@/helpers";
+import { useLocalStorage } from "@/hooks/use-local-storage";
+
+// redux
 import { useDispatch } from "react-redux";
+import { setAllTasks } from "@/store/tasks/actions";
 import { closeModal } from "@/store/modal/actions";
 import { CREATE_TASK } from "@/components/modals/constants";
 
@@ -48,6 +57,10 @@ const formSchema = z.object({
 });
 
 export function CreateNewTaskForm() {
+  const dispatch = useDispatch();
+
+  const { setTasks, getTasks } = useLocalStorage("Tasks");
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -56,22 +69,13 @@ export function CreateNewTaskForm() {
     },
   });
 
-  const dispatch = useDispatch();
-
-  const { setTasks, getTasks } = useLocalStorage("Tasks");
-
   function onSubmit(values: z.infer<typeof formSchema>) {
     try {
       // Get all tasks from local storage
       const allTasks = getTasks() || [];
 
       // Generate a unique task ID
-      const taskId = generateTodoId();
-
-      // Adjust the due date to fix the issue with the date picker returning the day before the selected due date
-      // const dueDate = new Date(values.dueDate);
-      // dueDate.setDate(dueDate.getDate() + 1);
-      // values.dueDate = dueDate;
+      const taskId = generateTaskId();
 
       // Create a new task object
       const newTask = {

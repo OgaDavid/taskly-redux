@@ -7,7 +7,7 @@ export function getToday() {
   return today;
 }
 
-export function generateTodoId(): string {
+export function generateTaskId(): string {
   const characters =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
   let shortId = "";

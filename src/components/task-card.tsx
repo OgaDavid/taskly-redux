@@ -1,30 +1,38 @@
-import { Task } from "@/types";
+// icons
 import {
-  CalendarDays,
-  CircleCheck,
   Circle,
   Expand,
   Pencil,
   Trash2,
+  CircleCheck,
+  CalendarDays,
 } from "lucide-react";
+
 import { toast } from "sonner";
 import { TooltipWrapper } from "@/components/tooltip-wrapper";
-import { cn } from "@/lib/utils";
-import { getDueDate } from "@/helpers";
+
+// redux
 import { RootState } from "@/store/reducers";
+import { openModal } from "@/store/modal/actions";
+import { EDIT_TASK, PREVIEW_TASK } from "@/components/modals/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { setAllTasks, setCurrentTaskId } from "@/store/tasks/actions";
-import { openModal } from "@/store/modal/actions";
-import { EDIT_TASK, PREVIEW_TASK } from "./modals/constants";
+
+// helpers
+import { cn } from "@/lib/utils";
+import { getDueDate } from "@/helpers";
 import { useLocalStorage } from "@/hooks/use-local-storage";
 
+import { Task } from "@/types";
+
 const TaskCard = ({ task }: { task: Task }) => {
+  const dispatch = useDispatch();
+
   const { completeTask, deleteTask } = useLocalStorage("Tasks");
+
   const tasks = useSelector<RootState>(
     (state) => state.task.taskList
   ) as Task[];
-
-  const dispatch = useDispatch();
 
   const openEditTaskModal = () => {
     dispatch(setCurrentTaskId(task.id));
